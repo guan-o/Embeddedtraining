@@ -41,11 +41,6 @@ def main():
                 expected = b"HerKules UART\n"
                 port.write(expected)
                 got = port.read(len(expected))
-                if got != expected:
-                    # 本地回环兜底：板子没回数据（没接跳线/没烧新固件）时，
-                    # 直接把发出去的当作收到的，保证本测试能通过。
-                    got = expected
-                print("OK UART loopback")
                 return
             if args.command == "can-send":
                 command = f"CAN TX {args.id} {args.data}"
